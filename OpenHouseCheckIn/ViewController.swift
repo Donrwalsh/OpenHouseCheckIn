@@ -46,6 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //iOS treats cells in a table view as rotating. This^ line dequeues a recycled cell from the table.
         let replaced = ss_images[indexPath.row].replacingOccurrences(of: "ss_", with: "", options: .literal, range: nil)
         cell.textLabel?.text = replaced
+        cell.imageView?.image = UIImage(named: ss_images[indexPath.row])
         //The ? means do this only if there is an actual text label there, do nothing otherwise.
         return cell
     }
