@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E36B6FF31ED8EC4100AD1CF9"
+               BlueprintIdentifier = "E391E5E91F034E2B00224DBC"
                BuildableName = "OpenHouseCheckIn.app"
                BlueprintName = "OpenHouseCheckIn"
                ReferencedContainer = "container:OpenHouseCheckIn.xcodeproj">
@@ -28,31 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E36B70071ED8EC4100AD1CF9"
-               BuildableName = "OpenHouseCheckInTests.xctest"
-               BlueprintName = "OpenHouseCheckInTests"
-               ReferencedContainer = "container:OpenHouseCheckIn.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E36B70121ED8EC4100AD1CF9"
-               BuildableName = "OpenHouseCheckInUITests.xctest"
-               BlueprintName = "OpenHouseCheckInUITests"
-               ReferencedContainer = "container:OpenHouseCheckIn.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E36B6FF31ED8EC4100AD1CF9"
+            BlueprintIdentifier = "E391E5E91F034E2B00224DBC"
             BuildableName = "OpenHouseCheckIn.app"
             BlueprintName = "OpenHouseCheckIn"
             ReferencedContainer = "container:OpenHouseCheckIn.xcodeproj">
@@ -75,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E36B6FF31ED8EC4100AD1CF9"
+            BlueprintIdentifier = "E391E5E91F034E2B00224DBC"
             BuildableName = "OpenHouseCheckIn.app"
             BlueprintName = "OpenHouseCheckIn"
             ReferencedContainer = "container:OpenHouseCheckIn.xcodeproj">
@@ -94,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E36B6FF31ED8EC4100AD1CF9"
+            BlueprintIdentifier = "E391E5E91F034E2B00224DBC"
             BuildableName = "OpenHouseCheckIn.app"
             BlueprintName = "OpenHouseCheckIn"
             ReferencedContainer = "container:OpenHouseCheckIn.xcodeproj">

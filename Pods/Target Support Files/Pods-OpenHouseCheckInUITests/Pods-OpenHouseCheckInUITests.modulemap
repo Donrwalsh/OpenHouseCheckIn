@@ -1,6 +1,0 @@
-framework module Pods_OpenHouseCheckInUITests {
-  umbrella header "Pods-OpenHouseCheckInUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

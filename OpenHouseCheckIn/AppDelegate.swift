@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  OpenHouseCheckIn
 //
-//  Created by Laura Farvour on 5/26/17.
-//  Copyright © 2017 Bigbrass. All rights reserved.
+//  Created by Laura Farvour on 6/27/17.
+//  Copyright © 2017 Don Walsh. All rights reserved.
 //
 
 import UIKit
