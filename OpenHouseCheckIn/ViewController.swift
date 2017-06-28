@@ -44,7 +44,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //Calling cellForRowAt method which must return a table view cell. (Created in the interface builder)
         let cell = tableView.dequeueReusableCell(withIdentifier: "ss_image", for: indexPath)
         //iOS treats cells in a table view as rotating. This^ line dequeues a recycled cell from the table.
-        cell.textLabel?.text = ss_images[indexPath.row]
+        let replaced = ss_images[indexPath.row].replacingOccurrences(of: "ss_", with: "", options: .literal, range: nil)
+        cell.textLabel?.text = replaced
         //The ? means do this only if there is an actual text label there, do nothing otherwise.
         return cell
     }
