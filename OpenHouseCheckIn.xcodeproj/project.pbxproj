@@ -13,6 +13,9 @@
 		E391E5F51F034E2B00224DBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E391E5F41F034E2B00224DBC /* Assets.xcassets */; };
 		E391E5F81F034E2B00224DBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E391E5F61F034E2B00224DBC /* LaunchScreen.storyboard */; };
 		E391E6011F03FD5800224DBC /* ss_maxresdefault.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E391E6001F03FD5800224DBC /* ss_maxresdefault.jpg */; };
+		E391E6091F0440E200224DBC /* SS_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E6081F0440E200224DBC /* SS_Image.swift */; };
+		E391E60B1F0441C400224DBC /* SS_ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E60A1F0441C400224DBC /* SS_ImageTableViewCell.swift */; };
+		E391E60D1F044A2800224DBC /* ss_ImageAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		E391E5F71F034E2B00224DBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E391E5F91F034E2B00224DBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E391E6001F03FD5800224DBC /* ss_maxresdefault.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ss_maxresdefault.jpg; sourceTree = "<group>"; };
+		E391E6081F0440E200224DBC /* SS_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SS_Image.swift; sourceTree = "<group>"; };
+		E391E60A1F0441C400224DBC /* SS_ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SS_ImageTableViewCell.swift; sourceTree = "<group>"; };
+		E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ss_ImageAddController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +65,10 @@
 				E391E5FF1F03FD5800224DBC /* Content */,
 				E391E5ED1F034E2B00224DBC /* AppDelegate.swift */,
 				E391E5EF1F034E2B00224DBC /* ViewController.swift */,
+				E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */,
 				E391E5F11F034E2B00224DBC /* Main.storyboard */,
+				E391E6081F0440E200224DBC /* SS_Image.swift */,
+				E391E60A1F0441C400224DBC /* SS_ImageTableViewCell.swift */,
 				E391E5F41F034E2B00224DBC /* Assets.xcassets */,
 				E391E5F61F034E2B00224DBC /* LaunchScreen.storyboard */,
 				E391E5F91F034E2B00224DBC /* Info.plist */,
@@ -148,8 +157,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E391E6091F0440E200224DBC /* SS_Image.swift in Sources */,
 				E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */,
+				E391E60D1F044A2800224DBC /* ss_ImageAddController.swift in Sources */,
 				E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */,
+				E391E60B1F0441C400224DBC /* SS_ImageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
