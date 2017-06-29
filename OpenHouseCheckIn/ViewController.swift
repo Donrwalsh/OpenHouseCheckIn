@@ -64,6 +64,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    // Determine whether a given row is eligible for reordering or not.
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
+    {
+        return true;
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("Deleted")
@@ -74,14 +80,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func tableView(tableView: UITableView, editingStyleForRowAt indexPath: NSIndexPath!) -> UITableViewCellEditingStyle
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle
     {
-        if (SSTableView2.isEditing && indexPath != nil){
+        if (!SSTableView2.isEditing){
             return UITableViewCellEditingStyle.none;
-        }
-        
-        if (SSTableView2.isEditing && indexPath.row == ss_images2.count){
-            return UITableViewCellEditingStyle.insert;
         }
         else{
             return UITableViewCellEditingStyle.delete;
@@ -89,14 +91,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //return UITableViewCellEditingStyle.Delete;
     }
     
-    // Determine whether a given row is eligible for reordering or not.
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath!) -> Bool
-    {
-        return true;
-    }
+
     
     // Process the row move. This means updating the data model to correct the item indices.
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath!, toIndexPath destinationIndexPath: NSIndexPath!)
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
         let item : SS_Image = ss_images2[sourceIndexPath.row];
         ss_images2.remove(at: sourceIndexPath.row);
@@ -105,7 +103,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
         return true
     }
@@ -209,6 +207,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     //MARK: Private Methods
+    
+    
     
     private func saveSS_Images() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ss_images2, toFile: SS_Image.ArchiveURL.path)
