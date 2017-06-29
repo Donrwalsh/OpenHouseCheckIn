@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var ss_images2 = [SS_Image]()
     @IBOutlet weak var SSTableView2: UITableView!
+    @IBOutlet weak var editButton: UIButton!
     
     
 
@@ -62,6 +63,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            
+            ss_images2.remove(at: indexPath.row)
+            SSTableView2.deleteRows(at: [indexPath], with: .automatic)
+            saveSS_Images()
+        }
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAt indexPath: NSIndexPath!) -> UITableViewCellEditingStyle
+    {
+        if (SSTableView2.isEditing && indexPath != nil){
+            return UITableViewCellEditingStyle.none;
+        }
+        
+        if (SSTableView2.isEditing && indexPath.row == ss_images2.count){
+            return UITableViewCellEditingStyle.insert;
+        }
+        else{
+            return UITableViewCellEditingStyle.delete;
+        }
+        //return UITableViewCellEditingStyle.Delete;
+    }
+    
+    // Determine whether a given row is eligible for reordering or not.
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath!) -> Bool
+    {
+        return true;
+    }
+    
+    // Process the row move. This means updating the data model to correct the item indices.
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath!, toIndexPath destinationIndexPath: NSIndexPath!)
+    {
+        let item : SS_Image = ss_images2[sourceIndexPath.row];
+        ss_images2.remove(at: sourceIndexPath.row);
+        ss_images2.insert(item, at: destinationIndexPath.row)
+        saveSS_Images()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool
+    {
+        return true
+    }
+
     
     //MARK: UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -124,6 +172,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
      //MARK: Actions
+    
+    @IBAction func startEditing(_ sender: UIButton) {
+        if !SSTableView2.isEditing {
+            editButton.setTitle("Done", for: .normal)
+        } else {
+            editButton.setTitle("Edit", for: .normal)
+        }
+        SSTableView2.isEditing = !SSTableView2.isEditing
+        
+        
+    }
+    
     
     @IBAction func unwindToConfigPage(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ss_ImageAddController, let ss_image = sourceViewController.ss_image {

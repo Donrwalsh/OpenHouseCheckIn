@@ -36,6 +36,14 @@
                                     <segue destination="XOw-kt-EYg" kind="presentation" identifier="AddItem" id="OZh-uW-xvZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVc-H9-OJW">
+                                <rect key="frame" x="20" y="67" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="startEditing:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gkk-sm-kKW"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-jK-8sT">
                                 <rect key="frame" x="20" y="101" width="296" height="399"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -85,6 +93,7 @@
                     <navigationItem key="navigationItem" id="gfn-m0-AYl"/>
                     <connections>
                         <outlet property="SSTableView2" destination="2Tl-jK-8sT" id="Dcs-TO-MUN"/>
+                        <outlet property="editButton" destination="TVc-H9-OJW" id="36Y-ED-qz8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
