@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3170A291F071A51003F8687 /* QuestionEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3170A281F071A51003F8687 /* QuestionEdit.swift */; };
+		E3170A2D1F071AFC003F8687 /* DLRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E3170A2C1F071AFC003F8687 /* DLRadioButton.m */; };
+		E3170A381F0737E8003F8687 /* DLRadioButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3170A351F0737D0003F8687 /* DLRadioButton.framework */; };
+		E3170A391F0737E8003F8687 /* DLRadioButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3170A351F0737D0003F8687 /* DLRadioButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E361A3A51F05CE3F00780E9E /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E361A3A41F05CE3F00780E9E /* Question.swift */; };
 		E361A3A71F05D3FD00780E9E /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E361A3A61F05D3FD00780E9E /* QuestionCell.swift */; };
 		E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5ED1F034E2B00224DBC /* AppDelegate.swift */; };
@@ -16,7 +20,50 @@
 		E391E5F81F034E2B00224DBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E391E5F61F034E2B00224DBC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E3170A341F0737D0003F8687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3170A2E1F0737D0003F8687 /* DLRadioButton.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 634D5B5A1C5D8B0F00A3740D;
+			remoteInfo = DLRadioButton;
+		};
+		E3170A361F0737D0003F8687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3170A2E1F0737D0003F8687 /* DLRadioButton.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 636C50241C5D9315008B5C96;
+			remoteInfo = DLRadioButtonTests;
+		};
+		E3170A3A1F0737E8003F8687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3170A2E1F0737D0003F8687 /* DLRadioButton.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 634D5B591C5D8B0F00A3740D;
+			remoteInfo = DLRadioButton;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E3170A3C1F0737E8003F8687 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E3170A391F0737E8003F8687 /* DLRadioButton.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		E3170A281F071A51003F8687 /* QuestionEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionEdit.swift; sourceTree = "<group>"; };
+		E3170A2A1F071AFB003F8687 /* OpenHouseCheckIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenHouseCheckIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		E3170A2B1F071AFC003F8687 /* DLRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLRadioButton.h; sourceTree = "<group>"; };
+		E3170A2C1F071AFC003F8687 /* DLRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLRadioButton.m; sourceTree = "<group>"; };
+		E3170A2E1F0737D0003F8687 /* DLRadioButton.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DLRadioButton.xcodeproj; path = "../../../Downloads/DLRadioButton-master/DLRadioButton.xcodeproj"; sourceTree = "<group>"; };
 		E361A3A41F05CE3F00780E9E /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		E361A3A61F05D3FD00780E9E /* QuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		E391E5EA1F034E2B00224DBC /* OpenHouseCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenHouseCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,12 +80,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3170A381F0737E8003F8687 /* DLRadioButton.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E3170A2F1F0737D0003F8687 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E3170A351F0737D0003F8687 /* DLRadioButton.framework */,
+				E3170A371F0737D0003F8687 /* DLRadioButtonTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E391E5E11F034E2B00224DBC = {
 			isa = PBXGroup;
 			children = (
@@ -59,13 +116,18 @@
 			isa = PBXGroup;
 			children = (
 				E391E5ED1F034E2B00224DBC /* AppDelegate.swift */,
+				E3170A2B1F071AFC003F8687 /* DLRadioButton.h */,
+				E3170A2C1F071AFC003F8687 /* DLRadioButton.m */,
 				E391E5EF1F034E2B00224DBC /* ViewController.swift */,
 				E361A3A61F05D3FD00780E9E /* QuestionCell.swift */,
+				E3170A2E1F0737D0003F8687 /* DLRadioButton.xcodeproj */,
 				E361A3A41F05CE3F00780E9E /* Question.swift */,
 				E391E5F11F034E2B00224DBC /* Main.storyboard */,
+				E3170A281F071A51003F8687 /* QuestionEdit.swift */,
 				E391E5F41F034E2B00224DBC /* Assets.xcassets */,
 				E391E5F61F034E2B00224DBC /* LaunchScreen.storyboard */,
 				E391E5F91F034E2B00224DBC /* Info.plist */,
+				E3170A2A1F071AFB003F8687 /* OpenHouseCheckIn-Bridging-Header.h */,
 			);
 			path = OpenHouseCheckIn;
 			sourceTree = "<group>";
@@ -80,10 +142,12 @@
 				E391E5E61F034E2B00224DBC /* Sources */,
 				E391E5E71F034E2B00224DBC /* Frameworks */,
 				E391E5E81F034E2B00224DBC /* Resources */,
+				E3170A3C1F0737E8003F8687 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E3170A3B1F0737E8003F8687 /* PBXTargetDependency */,
 			);
 			name = OpenHouseCheckIn;
 			productName = OpenHouseCheckIn;
@@ -102,6 +166,7 @@
 				TargetAttributes = {
 					E391E5E91F034E2B00224DBC = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -117,12 +182,35 @@
 			mainGroup = E391E5E11F034E2B00224DBC;
 			productRefGroup = E391E5EB1F034E2B00224DBC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E3170A2F1F0737D0003F8687 /* Products */;
+					ProjectRef = E3170A2E1F0737D0003F8687 /* DLRadioButton.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E391E5E91F034E2B00224DBC /* OpenHouseCheckIn */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E3170A351F0737D0003F8687 /* DLRadioButton.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DLRadioButton.framework;
+			remoteRef = E3170A341F0737D0003F8687 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E3170A371F0737D0003F8687 /* DLRadioButtonTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DLRadioButtonTests.xctest;
+			remoteRef = E3170A361F0737D0003F8687 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E391E5E81F034E2B00224DBC /* Resources */ = {
@@ -143,13 +231,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				E361A3A51F05CE3F00780E9E /* Question.swift in Sources */,
+				E3170A2D1F071AFC003F8687 /* DLRadioButton.m in Sources */,
 				E361A3A71F05D3FD00780E9E /* QuestionCell.swift in Sources */,
 				E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */,
+				E3170A291F071A51003F8687 /* QuestionEdit.swift in Sources */,
 				E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E3170A3B1F0737E8003F8687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DLRadioButton;
+			targetProxy = E3170A3A1F0737E8003F8687 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E391E5F11F034E2B00224DBC /* Main.storyboard */ = {
@@ -270,10 +368,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = OpenHouseCheckIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.OpenHouseCheckIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenHouseCheckIn/OpenHouseCheckIn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -282,10 +384,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = OpenHouseCheckIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.OpenHouseCheckIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenHouseCheckIn/OpenHouseCheckIn-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
