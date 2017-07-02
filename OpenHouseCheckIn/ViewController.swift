@@ -11,97 +11,111 @@ import os.log
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var ss_images2 = [SS_Image]()
-    @IBOutlet weak var SSTableView2: UITableView!
+    var ss_images = [SS_Image]()
+    var toggle = false
+    var new_ss_image: SS_Image!
+    
+    @IBOutlet weak var SSTableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SSTableView2.delegate = self
-        SSTableView2.dataSource = self
+        SSTableView.delegate = self
+        SSTableView.dataSource = self
         
         if let savedSS_Images = loadSS_Images() {
-            ss_images2 += savedSS_Images
+            ss_images += savedSS_Images
         }
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if tableView == SSTableView {
+            return 1
+        } else {
+            fatalError("tableView Data Source Policy has been given an invalid table!")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ss_images2.count
+        if tableView == SSTableView {
+            return ss_images.count
+        } else {
+            fatalError("tableView Data Source Policy has been given an invalid table!")
+        }
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // Table view cells are reused and should be dequeued using a cell identifier.
-        let cellIdentifier = "SS_ImagesTableViewCell"
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SS_ImageTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+        if tableView == SSTableView {
+            let cellIdentifier = "SS_ImagesTableViewCell"
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SS_ImageTableViewCell  else {
+                fatalError("The dequeued cell is not an instance of SSTable.")
+            }
+            let ss_image = ss_images[indexPath.row]
+            
+            cell.nameLabel.text = ss_image.name
+            cell.imagePreview.image = ss_image.photo
+            cell.orderLabel.text = ""
+            
+            return cell
+        } else {
+            fatalError("tableView Data Source Policy has been given an invalid table!")
         }
-        
-        // Fetches the appropriate meal for the data source layout.
-        let ss_image = ss_images2[indexPath.row]
-        
-        cell.nameLabel.text = ss_image.name
-        cell.imagePreview.image = ss_image.photo
-        cell.orderLabel.text = ""
-        
-        return cell
     }
     
     // Determine whether a given row is eligible for reordering or not.
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
     {
-        return true;
+        if tableView == SSTableView {
+            return true
+        } else {
+            return false
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            print("Deleted")
+        if tableView == SSTableView {
+            if editingStyle == .delete {
+                print("Deleted")
             
-            ss_images2.remove(at: indexPath.row)
-            SSTableView2.deleteRows(at: [indexPath], with: .automatic)
-            saveSS_Images()
+                ss_images.remove(at: indexPath.row)
+                SSTableView.deleteRows(at: [indexPath], with: .automatic)
+                saveSS_Images()
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle
     {
-        if (!SSTableView2.isEditing){
+        if tableView == SSTableView {
+            if (!SSTableView.isEditing){
+                return UITableViewCellEditingStyle.none;
+            }
+            else{
+                return UITableViewCellEditingStyle.delete;
+            }
+        } else {
             return UITableViewCellEditingStyle.none;
         }
-        else{
-            return UITableViewCellEditingStyle.delete;
-        }
-        //return UITableViewCellEditingStyle.Delete;
     }
-    
-
     
     // Process the row move. This means updating the data model to correct the item indices.
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
-        let item : SS_Image = ss_images2[sourceIndexPath.row];
-        ss_images2.remove(at: sourceIndexPath.row);
-        ss_images2.insert(item, at: destinationIndexPath.row)
-        saveSS_Images()
+        if tableView == SSTableView {
+            let item : SS_Image = ss_images[sourceIndexPath.row];
+            ss_images.remove(at: sourceIndexPath.row);
+            ss_images.insert(item, at: destinationIndexPath.row)
+            saveSS_Images()
+        }
     }
-    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
@@ -121,10 +135,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-        
-        print("potato")
-        print(selectedImage)
-        print("potato")
         
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -153,56 +163,70 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             guard let selectedCell = sender as? SS_ImageTableViewCell else {
-                fatalError("Unexpected sender: \(sender)")
+                fatalError("Unexpected sender: \(sender.debugDescription)")
             }
             
-            guard let indexPath = SSTableView2.indexPath(for: selectedCell) else {
+            guard let indexPath = SSTableView.indexPath(for: selectedCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedSS_Image = ss_images2[indexPath.row]
+            let selectedSS_Image = ss_images[indexPath.row]
             SS_ImageViewController.ss_image = selectedSS_Image
             
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier)")
         }
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if toggle {
+            let alert = UIAlertController(title: "Saved", message: new_ss_image.name + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Crushed it", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            toggle = false
+        }
+    }
     
      //MARK: Actions
     
     @IBAction func startEditing(_ sender: UIButton) {
-        if !SSTableView2.isEditing {
+        if !SSTableView.isEditing {
             editButton.setTitle("Done", for: .normal)
         } else {
             editButton.setTitle("Edit", for: .normal)
         }
-        SSTableView2.isEditing = !SSTableView2.isEditing
-        
-        
+        SSTableView.isEditing = !SSTableView.isEditing
     }
-    
     
     @IBAction func unwindToConfigPage(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ss_ImageAddController, let ss_image = sourceViewController.ss_image {
             
-            if let selectedIndexPath = SSTableView2.indexPathForSelectedRow {
-                // Update an existing meal.
-                ss_images2[selectedIndexPath.row] = ss_image
-                SSTableView2.reloadRows(at: [selectedIndexPath], with: .none)
+            if let selectedIndexPath = SSTableView.indexPathForSelectedRow {
+                // Update an existing ss_image.
+                ss_images[selectedIndexPath.row] = ss_image
+                SSTableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
-                // Add a new meal.
-                let newIndexPath = IndexPath(row: ss_images2.count, section: 0)
+                // Add a new ss_image.
+                let newIndexPath = IndexPath(row: ss_images.count, section: 0)
                 
-                ss_images2.append(ss_image)
-                SSTableView2.insertRows(at: [newIndexPath], with: .automatic)
-                SSTableView2.reloadRows(at: [newIndexPath], with: .none)
+                ss_images.append(ss_image)
+                SSTableView.insertRows(at: [newIndexPath], with: .automatic)
+                SSTableView.reloadRows(at: [newIndexPath], with: .none)
             }
             
             // Save the slideshow Images.
+            
             saveSS_Images()
+            
+            //Show successful save message.
+            
+            toggle = true
+            new_ss_image = ss_image
+
         }
+
     }
     
     
@@ -211,7 +235,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     private func saveSS_Images() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ss_images2, toFile: SS_Image.ArchiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ss_images, toFile: SS_Image.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("SS_Images successfully saved.", log: OSLog.default, type: .debug)
         } else {

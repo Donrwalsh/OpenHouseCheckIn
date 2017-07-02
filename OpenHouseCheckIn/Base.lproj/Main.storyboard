@@ -92,7 +92,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gfn-m0-AYl"/>
                     <connections>
-                        <outlet property="SSTableView2" destination="2Tl-jK-8sT" id="Dcs-TO-MUN"/>
+                        <outlet property="SSTableView" destination="2Tl-jK-8sT" id="EXg-hO-8v0"/>
                         <outlet property="editButton" destination="TVc-H9-OJW" id="36Y-ED-qz8"/>
                     </connections>
                 </viewController>

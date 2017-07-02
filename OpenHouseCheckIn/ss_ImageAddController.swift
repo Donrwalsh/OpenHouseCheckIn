@@ -16,6 +16,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var nameTextField: UITextField!
    
     var ss_image: SS_Image?
+    var toggle = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         if let ss_image = ss_image {
             nameTextField.text   = ss_image.name
             previewImage.image = ss_image.photo
+            toggle = true
         }
         
         // Enable the Save button only if the text field and picture are populated.
@@ -67,6 +69,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         // Set photoImageView to display the selected image.
         previewImage.image = selectedImage
+        toggle = true
+        updateSaveButtonState()
         
         
         // Dismiss the picker.
@@ -127,9 +131,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
-        let text = nameTextField.text ?? " "
-        let image : UIImage? = previewImage.image
-        if (!text.isEmpty && image != nil) {
+        let text = nameTextField.text ?? ""
+        if (!text.isEmpty && toggle) {
             saveButton.isEnabled = true
         } else {
             saveButton.isEnabled = false
