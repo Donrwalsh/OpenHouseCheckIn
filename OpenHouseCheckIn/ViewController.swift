@@ -158,6 +158,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         switch(segue.identifier ?? "") {
             
+        case "Slideshow":
+            os_log("Navigating to slideshow.", log: OSLog.default, type: .debug)
+        
         case "AddItem":
             os_log("Adding a new SS_Image.", log: OSLog.default, type: .debug)
             

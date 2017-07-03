@@ -44,7 +44,7 @@
                                     <action selector="startEditing:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gkk-sm-kKW"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-jK-8sT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-jK-8sT">
                                 <rect key="frame" x="20" y="101" width="296" height="399"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -90,7 +90,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gfn-m0-AYl"/>
+                    <navigationItem key="navigationItem" id="gfn-m0-AYl">
+                        <barButtonItem key="rightBarButtonItem" title="Start Slideshow" style="plain" id="XuG-Wd-nuu">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qk8-He-iBJ">
+                                <rect key="frame" x="845" y="7" width="247" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start Slideshow"/>
+                                <connections>
+                                    <segue destination="hUR-y5-Bdk" kind="presentation" identifier="Slideshow" id="LrZ-Gd-ZpT"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="SSTableView" destination="2Tl-jK-8sT" id="EXg-hO-8v0"/>
                         <outlet property="editButton" destination="TVc-H9-OJW" id="36Y-ED-qz8"/>
@@ -104,6 +115,35 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="832.01438848920861" y="122.30215827338131"/>
+        </scene>
+        <!--Slideshow Controller-->
+        <scene sceneID="y8m-O5-1wt">
+            <objects>
+                <viewController id="hUR-y5-Bdk" customClass="SlideshowController" customModule="OpenHouseCheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L7o-Za-3DM"/>
+                        <viewControllerLayoutGuide type="bottom" id="xrj-lI-8iS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hCV-1T-iWW">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqs-fb-fBI" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                <rect key="frame" x="0.0" y="-30" width="1112" height="864"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CDz-Lh-0oU"/>
+                    <connections>
+                        <outlet property="slideshow" destination="uqs-fb-fBI" id="b8R-1v-iZp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gvM-gy-7Cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1998.5611510791368" y="121.58273381294966"/>
         </scene>
         <!--New Slideshow Image-->
         <scene sceneID="eDg-xy-vlO">

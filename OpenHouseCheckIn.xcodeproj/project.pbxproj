@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3170A431F0AD807003F8687 /* SlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3170A421F0AD807003F8687 /* SlideshowController.swift */; };
 		E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5ED1F034E2B00224DBC /* AppDelegate.swift */; };
 		E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5EF1F034E2B00224DBC /* ViewController.swift */; };
 		E391E5F31F034E2B00224DBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E391E5F11F034E2B00224DBC /* Main.storyboard */; };
@@ -16,9 +17,14 @@
 		E391E6091F0440E200224DBC /* SS_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E6081F0440E200224DBC /* SS_Image.swift */; };
 		E391E60B1F0441C400224DBC /* SS_ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E60A1F0441C400224DBC /* SS_ImageTableViewCell.swift */; };
 		E391E60D1F044A2800224DBC /* ss_ImageAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */; };
+		FDD39795824FC830CF6E63F7 /* Pods_OpenHouseCheckIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 022A9F822F3CF955D3E5D45E /* Pods_OpenHouseCheckIn.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		022A9F822F3CF955D3E5D45E /* Pods_OpenHouseCheckIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenHouseCheckIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DED677647B00B6C92D77D65 /* Pods-OpenHouseCheckIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenHouseCheckIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenHouseCheckIn/Pods-OpenHouseCheckIn.release.xcconfig"; sourceTree = "<group>"; };
+		9B8FD72CF164FAC7A4FAE059 /* Pods-OpenHouseCheckIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenHouseCheckIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenHouseCheckIn/Pods-OpenHouseCheckIn.debug.xcconfig"; sourceTree = "<group>"; };
+		E3170A421F0AD807003F8687 /* SlideshowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideshowController.swift; sourceTree = "<group>"; };
 		E391E5EA1F034E2B00224DBC /* OpenHouseCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenHouseCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E391E5ED1F034E2B00224DBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E391E5EF1F034E2B00224DBC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDD39795824FC830CF6E63F7 /* Pods_OpenHouseCheckIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FA2DD9087D428BBBD8E64FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				022A9F822F3CF955D3E5D45E /* Pods_OpenHouseCheckIn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FF8DE1951031BE326F0BAC2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9B8FD72CF164FAC7A4FAE059 /* Pods-OpenHouseCheckIn.debug.xcconfig */,
+				2DED677647B00B6C92D77D65 /* Pods-OpenHouseCheckIn.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E391E5E11F034E2B00224DBC = {
 			isa = PBXGroup;
 			children = (
 				E391E5EC1F034E2B00224DBC /* OpenHouseCheckIn */,
 				E391E5EB1F034E2B00224DBC /* Products */,
+				5FF8DE1951031BE326F0BAC2 /* Pods */,
+				3FA2DD9087D428BBBD8E64FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +93,7 @@
 				E391E5EF1F034E2B00224DBC /* ViewController.swift */,
 				E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */,
 				E391E5F11F034E2B00224DBC /* Main.storyboard */,
+				E3170A421F0AD807003F8687 /* SlideshowController.swift */,
 				E391E6081F0440E200224DBC /* SS_Image.swift */,
 				E391E60A1F0441C400224DBC /* SS_ImageTableViewCell.swift */,
 				E391E5F41F034E2B00224DBC /* Assets.xcassets */,
@@ -91,9 +118,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E391E5FC1F034E2B00224DBC /* Build configuration list for PBXNativeTarget "OpenHouseCheckIn" */;
 			buildPhases = (
+				E9EDA4D0FCF9F9E30A71C942 /* [CP] Check Pods Manifest.lock */,
 				E391E5E61F034E2B00224DBC /* Sources */,
 				E391E5E71F034E2B00224DBC /* Frameworks */,
 				E391E5E81F034E2B00224DBC /* Resources */,
+				80FFEC6E46C4E5B5A4EAF9BF /* [CP] Embed Pods Frameworks */,
+				B3BA83326EED024F2874792D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -153,11 +183,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		80FFEC6E46C4E5B5A4EAF9BF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenHouseCheckIn/Pods-OpenHouseCheckIn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3BA83326EED024F2874792D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenHouseCheckIn/Pods-OpenHouseCheckIn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9EDA4D0FCF9F9E30A71C942 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E391E5E61F034E2B00224DBC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3170A431F0AD807003F8687 /* SlideshowController.swift in Sources */,
 				E391E6091F0440E200224DBC /* SS_Image.swift in Sources */,
 				E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */,
 				E391E60D1F044A2800224DBC /* ss_ImageAddController.swift in Sources */,
@@ -285,6 +364,7 @@
 		};
 		E391E5FD1F034E2B00224DBC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B8FD72CF164FAC7A4FAE059 /* Pods-OpenHouseCheckIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 69VEP22CDG;
@@ -298,6 +378,7 @@
 		};
 		E391E5FE1F034E2B00224DBC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DED677647B00B6C92D77D65 /* Pods-OpenHouseCheckIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 69VEP22CDG;
