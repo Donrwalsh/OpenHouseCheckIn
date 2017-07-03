@@ -24,6 +24,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SSTableView.delegate = self
         SSTableView.dataSource = self
         
+        
+        
         if let savedSS_Images = loadSS_Images() {
             ss_images += savedSS_Images
         }
@@ -132,7 +134,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+        guard (info[UIImagePickerControllerOriginalImage] as? UIImage) != nil else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         
@@ -174,7 +176,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             SS_ImageViewController.ss_image = selectedSS_Image
             
         default:
-            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
     }
     

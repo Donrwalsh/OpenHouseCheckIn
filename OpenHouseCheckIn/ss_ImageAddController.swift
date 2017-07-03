@@ -23,6 +23,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         nameTextField.delegate = self
         
+        
+        
         if let ss_image = ss_image {
             nameTextField.text   = ss_image.name
             previewImage.image = ss_image.photo
@@ -118,6 +120,10 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        // .overCurrentContext allows for landscape and portrait mode
+        imagePickerController.modalPresentationStyle = .overCurrentContext
         
         // Only allow photos to be picked, not taken.
         imagePickerController.sourceType = .photoLibrary
