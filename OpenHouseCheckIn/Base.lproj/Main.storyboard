@@ -120,13 +120,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqs-fb-fBI" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                <rect key="frame" x="0.0" y="-30" width="1112" height="864"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="uqs-fb-fBI" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uqs-fb-fBI" firstAttribute="leading" secondItem="hCV-1T-iWW" secondAttribute="leading" id="4Gx-tk-JaG"/>
+                            <constraint firstItem="xrj-lI-8iS" firstAttribute="top" secondItem="uqs-fb-fBI" secondAttribute="bottom" id="QoY-hY-49R"/>
+                            <constraint firstItem="uqs-fb-fBI" firstAttribute="top" secondItem="hCV-1T-iWW" secondAttribute="top" id="SwC-J2-Llu"/>
+                            <constraint firstAttribute="trailing" secondItem="uqs-fb-fBI" secondAttribute="trailing" id="dgp-1R-4zr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CDz-Lh-0oU"/>
                     <connections>

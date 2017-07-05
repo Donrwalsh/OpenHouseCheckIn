@@ -97,7 +97,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
             owningNavigationController.popViewController(animated: true)
         }
         else {
-            fatalError("The MealViewController is not inside a navigation controller.")
+            fatalError("The View Controller is not inside a navigation controller.")
         }
     }
     
