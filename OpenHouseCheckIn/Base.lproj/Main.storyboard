@@ -56,31 +56,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ss_maxresdefault.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H30-4Z-2W6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="77" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYJ-9d-irV">
+                                                    <rect key="frame" x="75" y="0.0" width="213" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ngs-El-zRT">
+                                                    <rect key="frame" x="8" y="-1" width="63" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYJ-9d-irV">
-                                                    <rect key="frame" x="85" y="0.0" width="203" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="orderLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x80-KZ-pk2">
-                                                    <rect key="frame" x="85" y="22" width="203" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="imagePreview" destination="H30-4Z-2W6" id="J1y-NH-ZGG"/>
-                                            <outlet property="imageView" destination="H30-4Z-2W6" id="rJG-7Z-39O"/>
+                                            <outlet property="imagePreview" destination="ngs-El-zRT" id="e3B-ez-rtU"/>
                                             <outlet property="nameLabel" destination="AYJ-9d-irV" id="pAa-Q4-UWk"/>
-                                            <outlet property="orderLabel" destination="x80-KZ-pk2" id="hfX-h5-AtH"/>
                                             <segue destination="Nfi-l5-H0r" kind="show" identifier="ShowDetail" id="6Rn-e1-03I"/>
                                         </connections>
                                     </tableViewCell>
@@ -249,7 +240,6 @@
     </scenes>
     <resources>
         <image name="no-photo-selected" width="640" height="640"/>
-        <image name="ss_maxresdefault.jpg" width="1280" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6Rn-e1-03I"/>

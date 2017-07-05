@@ -11,6 +11,9 @@
 import UIKit
 import os.log
 
+
+
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var ss_images = [SS_Image]()
@@ -19,7 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var SSTableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,7 +69,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             cell.nameLabel.text = ss_image.name
             cell.imagePreview.image = ss_image.photo
-            cell.orderLabel.text = ""
+            
+            
+            print(cell.nameLabel.text ?? "potato")
+            print("clipsToBounds: " + String(cell.imagePreview.clipsToBounds))
+            print(cell.imagePreview.contentMode.rawValue)
+            print()
             
             return cell
         } else {
@@ -194,6 +202,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             toggle = false
         }
     }
+
     
      //MARK: Actions
     
