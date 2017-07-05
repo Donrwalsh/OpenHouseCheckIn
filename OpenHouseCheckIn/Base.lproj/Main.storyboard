@@ -108,6 +108,24 @@
             </objects>
             <point key="canvasLocation" x="832.01438848920861" y="122.30215827338131"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="uqp-Vi-hut">
+            <objects>
+                <viewController id="KBi-HD-hkY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0g8-YB-dBa"/>
+                        <viewControllerLayoutGuide type="bottom" id="zb1-DM-Fm3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DaN-D6-zgY">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C2O-wH-3Wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1990" y="-879"/>
+        </scene>
         <!--Slideshow Controller-->
         <scene sceneID="y8m-O5-1wt">
             <objects>
@@ -123,6 +141,10 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="uqs-fb-fBI" customClass="ImageSlideshow" customModule="ImageSlideshow">
                                 <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="lOb-Oj-9PU" appends="YES" id="vJx-e7-Dtb"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,8 +161,45 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvM-gy-7Cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="down" id="jO5-F1-PYG" userLabel="Swipe Down Gesture">
+                    <connections>
+                        <action selector="swipeDown:" destination="hUR-y5-Bdk" id="C2A-Gz-GJR"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="lOb-Oj-9PU">
+                    <connections>
+                        <action selector="onTap:" destination="hUR-y5-Bdk" id="XMB-si-kRr"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1998.5611510791368" y="121.58273381294966"/>
+            <point key="canvasLocation" x="1990" y="122"/>
+        </scene>
+        <!--downSwipe-->
+        <scene sceneID="5gq-MU-aAT">
+            <objects>
+                <viewController storyboardIdentifier="downSwipe" title="downSwipe" id="dVw-BZ-WfN" customClass="downSwipe" customModule="OpenHouseCheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wyg-Pc-hIy"/>
+                        <viewControllerLayoutGuide type="bottom" id="y6m-7T-Bzv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8XX-r5-mcg">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="POTATO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-jr-Hb3">
+                                <rect key="frame" x="535" y="350" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="31R-0L-4NJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1988" y="983"/>
         </scene>
         <!--New Slideshow Image-->
         <scene sceneID="eDg-xy-vlO">
@@ -231,7 +290,7 @@
         <!--Navigation Controller-->
         <scene sceneID="YLy-YT-lPD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vIT-Jf-J7O" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="configMainNav" automaticallyAdjustsScrollViewInsets="NO" id="vIT-Jf-J7O" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jmh-Tf-9cc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
