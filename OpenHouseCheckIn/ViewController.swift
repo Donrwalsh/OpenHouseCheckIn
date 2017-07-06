@@ -165,8 +165,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         case "Slideshow":
             os_log("Navigating to slideshow.", log: OSLog.default, type: .debug)
         
-        case "AddItem":
+        case "AddSS":
             os_log("Adding a new SS_Image.", log: OSLog.default, type: .debug)
+            let ssImageAddController = segue.destination.childViewControllers[0] as! ss_ImageAddController
+            ssImageAddController.potato = "SS"
             
         case "ShowDetail":
             guard let SS_ImageViewController = segue.destination as? ss_ImageAddController else {

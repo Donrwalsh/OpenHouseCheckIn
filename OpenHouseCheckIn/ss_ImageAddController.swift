@@ -18,9 +18,12 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     var ssImage: userImage?
     var toggle = false
+    public var potato: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(potato)
         
         nameTextField.delegate = self
         previewImage.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).cgColor
