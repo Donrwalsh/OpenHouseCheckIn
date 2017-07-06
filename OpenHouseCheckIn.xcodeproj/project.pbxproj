@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E3170A431F0AD807003F8687 /* SlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3170A421F0AD807003F8687 /* SlideshowController.swift */; };
 		E3170A451F0D90C0003F8687 /* downSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3170A441F0D90C0003F8687 /* downSwipe.swift */; };
+		E3319C8B1F0EC9E300E9625D /* userImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3319C8A1F0EC9E300E9625D /* userImage.swift */; };
 		E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5ED1F034E2B00224DBC /* AppDelegate.swift */; };
 		E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5EF1F034E2B00224DBC /* ViewController.swift */; };
 		E391E5F31F034E2B00224DBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E391E5F11F034E2B00224DBC /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		9B8FD72CF164FAC7A4FAE059 /* Pods-OpenHouseCheckIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenHouseCheckIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenHouseCheckIn/Pods-OpenHouseCheckIn.debug.xcconfig"; sourceTree = "<group>"; };
 		E3170A421F0AD807003F8687 /* SlideshowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideshowController.swift; sourceTree = "<group>"; };
 		E3170A441F0D90C0003F8687 /* downSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = downSwipe.swift; sourceTree = "<group>"; };
+		E3319C8A1F0EC9E300E9625D /* userImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = userImage.swift; path = ../userImage.swift; sourceTree = "<group>"; };
 		E391E5EA1F034E2B00224DBC /* OpenHouseCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenHouseCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E391E5ED1F034E2B00224DBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E391E5EF1F034E2B00224DBC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				E391E5FF1F03FD5800224DBC /* Content */,
 				E391E5ED1F034E2B00224DBC /* AppDelegate.swift */,
 				E391E5EF1F034E2B00224DBC /* ViewController.swift */,
+				E3319C8A1F0EC9E300E9625D /* userImage.swift */,
 				E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */,
 				E391E5F11F034E2B00224DBC /* Main.storyboard */,
 				E3170A421F0AD807003F8687 /* SlideshowController.swift */,
@@ -239,6 +242,7 @@
 				E391E6091F0440E200224DBC /* SS_Image.swift in Sources */,
 				E3170A451F0D90C0003F8687 /* downSwipe.swift in Sources */,
 				E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */,
+				E3319C8B1F0EC9E300E9625D /* userImage.swift in Sources */,
 				E391E60D1F044A2800224DBC /* ss_ImageAddController.swift in Sources */,
 				E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */,
 				E391E60B1F0441C400224DBC /* SS_ImageTableViewCell.swift in Sources */,
