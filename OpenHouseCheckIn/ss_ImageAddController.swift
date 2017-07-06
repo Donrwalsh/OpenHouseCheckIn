@@ -14,7 +14,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var nameTextField: UITextField!
-   
+    @IBOutlet weak var selectImageText: UILabel!
+    
     var ss_image: SS_Image?
     var toggle = false
     
@@ -22,13 +23,16 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         super.viewDidLoad()
         
         nameTextField.delegate = self
-        
+        previewImage.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).cgColor
+        previewImage.layer.cornerRadius = 5.0
+        previewImage.layer.borderWidth = 2
         
         
         if let ss_image = ss_image {
             nameTextField.text   = ss_image.name
             previewImage.image = ss_image.photo
             toggle = true
+            selectImageText.text = ""
         }
         
         // Enable the Save button only if the text field and picture are populated.
@@ -72,8 +76,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         // Set photoImageView to display the selected image.
         previewImage.image = selectedImage
         toggle = true
+        selectImageText.text = " "
         updateSaveButtonState()
-        
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
@@ -93,7 +97,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
             owningNavigationController.popViewController(animated: true)
         }
         else {
-            fatalError("The MealViewController is not inside a navigation controller.")
+            fatalError("The View Controller is not inside a navigation controller.")
         }
     }
     

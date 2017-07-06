@@ -11,11 +11,10 @@ import UIKit
 class SS_ImageTableViewCell: UITableViewCell {
     
     //MARK: Properties
+
     
     @IBOutlet weak var imagePreview: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var orderLabel: UILabel!
-    var ss_image = [SS_Image]()
     
 
     
