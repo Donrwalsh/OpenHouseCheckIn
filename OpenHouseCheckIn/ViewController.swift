@@ -184,7 +184,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             let selectedSSImage = ssImages[indexPath.row]
-            SS_ImageViewController.ssImage = selectedSSImage
+            SS_ImageViewController.currentImage = selectedSSImage
+            SS_ImageViewController.potato = "SSEdit"
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -214,18 +215,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func unwindToConfigPage(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? ss_ImageAddController, let ssImage = sourceViewController.ssImage {
+        if let sourceViewController = sender.source as? ss_ImageAddController, let currentImage = sourceViewController.currentImage {
             
             if let selectedIndexPath = SSTableView.indexPathForSelectedRow {
                 // Update an existing ss_image.
-                ssImages[selectedIndexPath.row] = ssImage
+                ssImages[selectedIndexPath.row] = currentImage
                 SSTableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new ss_image.
                 let newIndexPath = IndexPath(row: ssImages.count, section: 0)
                 
-                ssImages.append(ssImage)
+                ssImages.append(currentImage)
                 SSTableView.insertRows(at: [newIndexPath], with: .automatic)
                 SSTableView.reloadRows(at: [newIndexPath], with: .none)
             }
@@ -237,7 +238,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //Show successful save message.
             
             toggle = true
-            newSSImage = ssImage
+            newSSImage = currentImage
 
         }
 

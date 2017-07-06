@@ -16,27 +16,25 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var selectImageText: UILabel!
     
-    var ssImage: userImage?
+    var currentImage: userImage?
     var toggle = false
     public var potato: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(potato)
-        
         nameTextField.delegate = self
         previewImage.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).cgColor
         previewImage.layer.cornerRadius = 5.0
         previewImage.layer.borderWidth = 2
         
-        
-        if let ssImage = ssImage {
-            nameTextField.text = ssImage.name
-            previewImage.image = ssImage.photo
+        if let currentImage = currentImage {
+            nameTextField.text = currentImage.name
+            previewImage.image = currentImage.photo
             toggle = true
             selectImageText.text = ""
         }
+        updatePageTitle()
         
         // Enable the Save button only if the text field and picture are populated.
         updateSaveButtonState()
@@ -57,9 +55,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateSaveButtonState()
-        navigationItem.title = textField.text
+        updatePageTitle()
     }
-    
     
     
     
@@ -81,6 +78,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         toggle = true
         selectImageText.text = " "
         updateSaveButtonState()
+        updatePageTitle()
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
@@ -116,9 +114,15 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         let name = nameTextField.text ?? ""
         let photo = previewImage.image
-        let group = "SS"
+        var group = " "
+        if (potato == "SS" || potato == "SSEdit") {
+            group = "SS"
+        } else {
+            group = "DANGER"
+        }
         
-        ssImage = userImage(name: name, photo: photo!, group: group)
+        
+        currentImage = userImage(name: name, photo: photo!, group: group)
     }
     
     //MARK: Actions
@@ -149,6 +153,17 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
             saveButton.isEnabled = true
         } else {
             saveButton.isEnabled = false
+        }
+    }
+    
+    private func updatePageTitle() {
+        if potato == "SS" {
+            self.navigationItem.title = "New Slideshow Image"
+            if nameTextField.text != nil {
+                self.navigationItem.title = "New Slifeshow Image: " + nameTextField.text!
+            }
+        } else if potato == "SSEdit" {
+            self.navigationItem.title = "Editing Slideshow Image: " + nameTextField.text!
         }
     }
     
