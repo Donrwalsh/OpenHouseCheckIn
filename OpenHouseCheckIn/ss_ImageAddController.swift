@@ -117,8 +117,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         var group = " "
         if (potato == "SS" || potato == "SSEdit") {
             group = "SS"
-        } else {
-            group = "DANGER"
+        } else if potato == "SD" {
+            group = "SD"
         }
         
         
@@ -160,10 +160,14 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         if potato == "SS" {
             self.navigationItem.title = "New Slideshow Image"
             if nameTextField.text != nil {
-                self.navigationItem.title = "New Slifeshow Image: " + nameTextField.text!
+                self.navigationItem.title = "New Slideshow Image: " + nameTextField.text!
             }
         } else if potato == "SSEdit" {
             self.navigationItem.title = "Editing Slideshow Image: " + nameTextField.text!
+        } else if potato == "SD" {
+            self.navigationItem.title = "New Swipe Down Image"
+        } else if potato == "SDEdit" {
+            self.navigationItem.title = "Editing Swipe Down Image: " + nameTextField.text!
         }
     }
     

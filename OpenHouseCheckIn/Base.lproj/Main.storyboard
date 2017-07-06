@@ -73,7 +73,7 @@
                                         <connections>
                                             <outlet property="imagePreview" destination="ngs-El-zRT" id="e3B-ez-rtU"/>
                                             <outlet property="nameLabel" destination="AYJ-9d-irV" id="pAa-Q4-UWk"/>
-                                            <segue destination="Nfi-l5-H0r" kind="show" identifier="ShowDetail" id="6Rn-e1-03I"/>
+                                            <segue destination="Nfi-l5-H0r" kind="show" identifier="ShowDetailSS" id="6Rn-e1-03I"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -83,6 +83,34 @@
                                 <rect key="frame" x="378" y="101" width="296" height="399"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SD_ImagesTableViewCell" id="C7d-sj-E1R" customClass="SDImageTableViewCell" customModule="OpenHouseCheckIn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="296" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7d-sj-E1R" id="MKU-cN-7dm">
+                                            <rect key="frame" x="0.0" y="0.0" width="296" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y4P-dn-M9e">
+                                                    <rect key="frame" x="0.0" y="0.0" width="63" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJY-a3-ZAW">
+                                                    <rect key="frame" x="71" y="0.0" width="225" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imagePreview" destination="Y4P-dn-M9e" id="BM3-HT-t3q"/>
+                                            <outlet property="nameLabel" destination="fJY-a3-ZAW" id="bHb-hc-clD"/>
+                                            <segue destination="Nfi-l5-H0r" kind="show" identifier="ShowDetailSD" id="KZb-Pz-RIx"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe Down Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szW-3F-Xt5">
                                 <rect key="frame" x="378" y="72" width="296" height="21"/>
@@ -95,11 +123,17 @@
                                 <rect key="frame" x="378" y="68" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="startEditingSDImages:" destination="BYZ-38-t0r" eventType="touchUpInside" id="to2-gp-dI0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ube-Ci-oHT">
                                 <rect key="frame" x="628" y="68" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <segue destination="XOw-kt-EYg" kind="presentation" identifier="AddSD" id="PdE-Ho-7Rb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -117,8 +151,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="SDTableView" destination="cPx-q9-svw" id="t9i-mX-CyM"/>
                         <outlet property="SSTableView" destination="2Tl-jK-8sT" id="EXg-hO-8v0"/>
-                        <outlet property="editButton" destination="TVc-H9-OJW" id="36Y-ED-qz8"/>
+                        <outlet property="editSDButton" destination="brs-01-nwO" id="olF-O8-t5r"/>
+                        <outlet property="editSSButton" destination="TVc-H9-OJW" id="DCf-f7-4Kq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -342,6 +378,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6Rn-e1-03I"/>
+        <segue reference="KZb-Pz-RIx"/>
+        <segue reference="PdE-Ho-7Rb"/>
     </inferredMetricsTieBreakers>
 </document>

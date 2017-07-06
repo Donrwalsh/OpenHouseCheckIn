@@ -18,25 +18,35 @@ import os.log
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var ssImages = [userImage]()
+    var sdImages = [userImage]()
     var toggle = false
-    var newSSImage: userImage!
+    var newImage: userImage!
     
     @IBOutlet weak var SSTableView: UITableView!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editSSButton: UIButton!
+    
+    @IBOutlet weak var SDTableView: UITableView!
+    @IBOutlet weak var editSDButton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         SSTableView.delegate = self
         SSTableView.dataSource = self
+        SDTableView.delegate = self
+        SDTableView.dataSource = self
         
         if let savedUserImages = loadUserImages() {
             for image in savedUserImages {
                 if image.group == "SS" {
                     ssImages.append(image)
+                } else if image.group == "SD" {
+                    sdImages.append(image)
                 }
             }
         }
+        print(sdImages.count)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +58,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == SSTableView {
             return 1
+        } else if tableView == SDTableView {
+            return 1
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -56,6 +68,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == SSTableView {
             return ssImages.count
+        } else if tableView == SDTableView {
+            return sdImages.count
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -73,6 +87,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.imagePreview.image = ssImage.photo
             
             return cell
+        } else if tableView == SDTableView {
+            let cellIdentifier = "SD_ImagesTableViewCell"
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SDImageTableViewCell  else {
+                fatalError("The dequeued cell is not an instance of SDTable.")
+            }
+            let sdImage = sdImages[indexPath.row]
+            cell.nameLabel.text = sdImage.name
+            cell.imagePreview.image = sdImage.photo
+            
+            return cell
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -82,6 +107,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
     {
         if tableView == SSTableView {
+            return true
+        } else if tableView == SDTableView {
             return true
         } else {
             return false
@@ -97,6 +124,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 SSTableView.deleteRows(at: [indexPath], with: .automatic)
                 saveUserImages()
             }
+        } else if tableView == SDTableView {
+            if editingStyle == .delete {
+                print("Deleted")
+                
+                sdImages.remove(at: indexPath.row)
+                SDTableView.deleteRows(at: [indexPath], with: .automatic)
+                saveUserImages()
+            }
         }
     }
     
@@ -104,6 +139,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         if tableView == SSTableView {
             if (!SSTableView.isEditing){
+                return UITableViewCellEditingStyle.none;
+            }
+            else{
+                return UITableViewCellEditingStyle.delete;
+            }
+        } else if tableView == SDTableView {
+            if (!SDTableView.isEditing){
                 return UITableViewCellEditingStyle.none;
             }
             else{
@@ -122,6 +164,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             ssImages.remove(at: sourceIndexPath.row);
             ssImages.insert(item, at: destinationIndexPath.row)
             saveUserImages()
+        } else if tableView == SDTableView {
+            let item : userImage = sdImages[sourceIndexPath.row];
+            sdImages.remove(at: sourceIndexPath.row);
+            sdImages.insert(item, at: destinationIndexPath.row)
+            saveUserImages()
         }
     }
     
@@ -131,28 +178,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     
-    //MARK: UIImagePickerControllerDelegate
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        // Dismiss the picker if the user canceled.
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard (info[UIImagePickerControllerOriginalImage] as? UIImage) != nil else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-        
-        
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ss_ImageAdd") as! ss_ImageAddController
-        self.present(nextViewController, animated:true, completion:nil)
-        
-        // Dismiss the picker.
-        dismiss(animated: true, completion: nil)
-    }
     
     //MARK: Navigation
     
@@ -166,11 +191,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             os_log("Navigating to slideshow.", log: OSLog.default, type: .debug)
         
         case "AddSS":
-            os_log("Adding a new SS_Image.", log: OSLog.default, type: .debug)
+            os_log("Adding a new SSImage.", log: OSLog.default, type: .debug)
             let ssImageAddController = segue.destination.childViewControllers[0] as! ss_ImageAddController
             ssImageAddController.potato = "SS"
             
-        case "ShowDetail":
+        case "AddSD":
+            os_log("Adding a new SDImage.", log: OSLog.default, type: .debug)
+            let ssImageAddController = segue.destination.childViewControllers[0] as! ss_ImageAddController
+            ssImageAddController.potato = "SD"
+            
+        case "ShowDetailSS":
             guard let SS_ImageViewController = segue.destination as? ss_ImageAddController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
@@ -187,6 +217,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             SS_ImageViewController.currentImage = selectedSSImage
             SS_ImageViewController.potato = "SSEdit"
             
+        case "ShowDetailSD":
+            guard let SD_ImageViewController = segue.destination as? ss_ImageAddController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedCell = sender as? SDImageTableViewCell else {
+                fatalError("Unexpected sender: \(sender.debugDescription)")
+            }
+            
+            guard let indexPath = SDTableView.indexPath(for: selectedCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedSDImage = sdImages[indexPath.row]
+            SD_ImageViewController.currentImage = selectedSDImage
+            SD_ImageViewController.potato = "SDEdit"
+            
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
@@ -195,7 +242,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if toggle {
-            let alert = UIAlertController(title: "Saved", message: newSSImage.name + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Image Saved", message: newImage.name + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Crushed it", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             toggle = false
@@ -203,42 +250,82 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     
-     //MARK: Actions
+    //MARK: Actions
     
+    //Edit the Slideshow Images Table
     @IBAction func startEditing(_ sender: UIButton) {
         if !SSTableView.isEditing {
-            editButton.setTitle("Done", for: .normal)
+            editSSButton.setTitle("Done", for: .normal)
         } else {
-            editButton.setTitle("Edit", for: .normal)
+            editSSButton.setTitle("Edit", for: .normal)
         }
         SSTableView.isEditing = !SSTableView.isEditing
     }
     
+    @IBAction func startEditingSDImages(_ sender: UIButton) {
+        if !SDTableView.isEditing {
+            editSDButton.setTitle("Done", for: .normal)
+        } else {
+            editSDButton.setTitle("Edit", for: .normal)
+        }
+        SDTableView.isEditing = !SDTableView.isEditing
+    }
+    
+    
+    
+    
+    
     @IBAction func unwindToConfigPage(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ss_ImageAddController, let currentImage = sourceViewController.currentImage {
-            
-            if let selectedIndexPath = SSTableView.indexPathForSelectedRow {
-                // Update an existing ss_image.
-                ssImages[selectedIndexPath.row] = currentImage
-                SSTableView.reloadRows(at: [selectedIndexPath], with: .none)
-            }
-            else {
-                // Add a new ss_image.
-                let newIndexPath = IndexPath(row: ssImages.count, section: 0)
+            if sourceViewController.potato == "SS" || sourceViewController.potato == "SSEdit" {
+                if let selectedIndexPath = SSTableView.indexPathForSelectedRow {
+                    // Update an existing ss_image.
+                    ssImages[selectedIndexPath.row] = currentImage
+                    SSTableView.reloadRows(at: [selectedIndexPath], with: .none)
+                }
+                else {
+                    // Add a new ss_image.
+                    let newIndexPath = IndexPath(row: ssImages.count, section: 0)
+                    
+                    ssImages.append(currentImage)
+                    SSTableView.insertRows(at: [newIndexPath], with: .automatic)
+                    SSTableView.reloadRows(at: [newIndexPath], with: .none)
+                }
                 
-                ssImages.append(currentImage)
-                SSTableView.insertRows(at: [newIndexPath], with: .automatic)
-                SSTableView.reloadRows(at: [newIndexPath], with: .none)
+                // Save the slideshow Images.
+                
+                saveUserImages()
+                
+                //Show successful save message.
+                
+                toggle = true
+                newImage = currentImage
+            } else  if sourceViewController.potato == "SD" || sourceViewController.potato == "SDEdit" {
+                if let selectedIndexPath = SDTableView.indexPathForSelectedRow {
+                    // Update an existing sd_image.
+                    sdImages[selectedIndexPath.row] = currentImage
+                    SDTableView.reloadRows(at: [selectedIndexPath], with: .none)
+                }
+                else {
+                    // Add a new sd_image.
+                    let newIndexPath = IndexPath(row: sdImages.count, section: 0)
+                    
+                    sdImages.append(currentImage)
+                    SDTableView.insertRows(at: [newIndexPath], with: .automatic)
+                    SDTableView.reloadRows(at: [newIndexPath], with: .none)
+                }
+            
+                // Save the slideshow Images.
+                
+                saveUserImages()
+                
+                //Show successful save message.
+                
+                toggle = true
+                newImage = currentImage
             }
+
             
-            // Save the slideshow Images.
-            
-            saveUserImages()
-            
-            //Show successful save message.
-            
-            toggle = true
-            newSSImage = currentImage
 
         }
 
@@ -251,7 +338,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     private func saveUserImages() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ssImages, toFile: userImage.ArchiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ssImages + sdImages, toFile: userImage.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("SS_Images successfully saved.", log: OSLog.default, type: .debug)
         } else {
