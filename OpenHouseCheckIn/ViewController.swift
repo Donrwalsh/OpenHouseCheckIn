@@ -11,14 +11,15 @@
 import UIKit
 import os.log
 
+//Save user images working with multiple arrays?
 
 
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var ss_images = [SS_Image]()
+    var ssImages = [userImage]()
     var toggle = false
-    var new_ss_image: SS_Image!
+    var newSSImage: userImage!
     
     @IBOutlet weak var SSTableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
@@ -29,10 +30,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SSTableView.delegate = self
         SSTableView.dataSource = self
         
-        
-        
-        if let savedSS_Images = loadSS_Images() {
-            ss_images += savedSS_Images
+        if let savedUserImages = loadUserImages() {
+            for image in savedUserImages {
+                if image.group == "SS" {
+                    ssImages.append(image)
+                }
+            }
         }
     }
 
@@ -52,7 +55,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == SSTableView {
-            return ss_images.count
+            return ssImages.count
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -65,16 +68,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SS_ImageTableViewCell  else {
                 fatalError("The dequeued cell is not an instance of SSTable.")
             }
-            let ss_image = ss_images[indexPath.row]
-            
-            cell.nameLabel.text = ss_image.name
-            cell.imagePreview.image = ss_image.photo
-            
-            
-            print(cell.nameLabel.text ?? "potato")
-            print("clipsToBounds: " + String(cell.imagePreview.clipsToBounds))
-            print(cell.imagePreview.contentMode.rawValue)
-            print()
+            let ssImage = ssImages[indexPath.row]
+            cell.nameLabel.text = ssImage.name
+            cell.imagePreview.image = ssImage.photo
             
             return cell
         } else {
@@ -97,9 +93,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if editingStyle == .delete {
                 print("Deleted")
             
-                ss_images.remove(at: indexPath.row)
+                ssImages.remove(at: indexPath.row)
                 SSTableView.deleteRows(at: [indexPath], with: .automatic)
-                saveSS_Images()
+                saveUserImages()
             }
         }
     }
@@ -122,10 +118,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
         if tableView == SSTableView {
-            let item : SS_Image = ss_images[sourceIndexPath.row];
-            ss_images.remove(at: sourceIndexPath.row);
-            ss_images.insert(item, at: destinationIndexPath.row)
-            saveSS_Images()
+            let item : userImage = ssImages[sourceIndexPath.row];
+            ssImages.remove(at: sourceIndexPath.row);
+            ssImages.insert(item, at: destinationIndexPath.row)
+            saveUserImages()
         }
     }
     
@@ -185,8 +181,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedSS_Image = ss_images[indexPath.row]
-            SS_ImageViewController.ss_image = selectedSS_Image
+            let selectedSSImage = ssImages[indexPath.row]
+            SS_ImageViewController.ssImage = selectedSSImage
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -196,7 +192,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if toggle {
-            let alert = UIAlertController(title: "Saved", message: new_ss_image.name + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Saved", message: newSSImage.name + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Crushed it", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             toggle = false
@@ -216,30 +212,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func unwindToConfigPage(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? ss_ImageAddController, let ss_image = sourceViewController.ss_image {
+        if let sourceViewController = sender.source as? ss_ImageAddController, let ssImage = sourceViewController.ssImage {
             
             if let selectedIndexPath = SSTableView.indexPathForSelectedRow {
                 // Update an existing ss_image.
-                ss_images[selectedIndexPath.row] = ss_image
+                ssImages[selectedIndexPath.row] = ssImage
                 SSTableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new ss_image.
-                let newIndexPath = IndexPath(row: ss_images.count, section: 0)
+                let newIndexPath = IndexPath(row: ssImages.count, section: 0)
                 
-                ss_images.append(ss_image)
+                ssImages.append(ssImage)
                 SSTableView.insertRows(at: [newIndexPath], with: .automatic)
                 SSTableView.reloadRows(at: [newIndexPath], with: .none)
             }
             
             // Save the slideshow Images.
             
-            saveSS_Images()
+            saveUserImages()
             
             //Show successful save message.
             
             toggle = true
-            new_ss_image = ss_image
+            newSSImage = ssImage
 
         }
 
@@ -249,9 +245,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Private Methods
     
     
+
     
-    private func saveSS_Images() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ss_images, toFile: SS_Image.ArchiveURL.path)
+    private func saveUserImages() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ssImages, toFile: userImage.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("SS_Images successfully saved.", log: OSLog.default, type: .debug)
         } else {
@@ -259,7 +256,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    private func loadSS_Images() -> [SS_Image]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: SS_Image.ArchiveURL.path) as? [SS_Image]
+    private func loadUserImages() -> [userImage]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: userImage.ArchiveURL.path) as? [userImage]
     }
 }

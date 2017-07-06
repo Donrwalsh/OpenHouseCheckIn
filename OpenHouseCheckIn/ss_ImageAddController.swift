@@ -16,7 +16,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var selectImageText: UILabel!
     
-    var ss_image: SS_Image?
+    var ssImage: userImage?
     var toggle = false
     
     override func viewDidLoad() {
@@ -28,9 +28,9 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         previewImage.layer.borderWidth = 2
         
         
-        if let ss_image = ss_image {
-            nameTextField.text   = ss_image.name
-            previewImage.image = ss_image.photo
+        if let ssImage = ssImage {
+            nameTextField.text = ssImage.name
+            previewImage.image = ssImage.photo
             toggle = true
             selectImageText.text = ""
         }
@@ -113,9 +113,9 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         let name = nameTextField.text ?? ""
         let photo = previewImage.image
-        let order = 0
+        let group = "SS"
         
-        ss_image = SS_Image(name: name, photo: photo!, order: order)
+        ssImage = userImage(name: name, photo: photo!, group: group)
     }
     
     //MARK: Actions

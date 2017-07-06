@@ -161,11 +161,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvM-gy-7Cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer cancelsTouchesInView="NO" direction="down" id="jO5-F1-PYG" userLabel="Swipe Down Gesture">
-                    <connections>
-                        <action selector="swipeDown:" destination="hUR-y5-Bdk" id="C2A-Gz-GJR"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <tapGestureRecognizer id="lOb-Oj-9PU">
                     <connections>
                         <action selector="onTap:" destination="hUR-y5-Bdk" id="XMB-si-kRr"/>
@@ -325,6 +320,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6Rn-e1-03I"/>
+        <segue reference="Ir8-CY-Nws"/>
     </inferredMetricsTieBreakers>
 </document>

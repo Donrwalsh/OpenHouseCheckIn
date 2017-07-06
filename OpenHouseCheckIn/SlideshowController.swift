@@ -16,7 +16,7 @@ class SlideshowController: UIViewController {
         return .landscape
     }
     
-    var ss_images = [SS_Image]()
+    var ssImages = [userImage]()
     var imageSource = [ImageSource]()
     
     @IBOutlet weak var clickImage: UIImageView!
@@ -25,8 +25,12 @@ class SlideshowController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let savedSS_Images = loadSS_Images() {
-            ss_images += savedSS_Images
+        if let savedUserImages = loadUserImages() {
+            for image in savedUserImages {
+                if image.group == "SS" {
+                    ssImages.append(image)
+                }
+            }
         }
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
@@ -34,7 +38,7 @@ class SlideshowController: UIViewController {
         self.view.addGestureRecognizer(swipeDown)
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeDown.direction = UISwipeGestureRecognizerDirection.left
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
         
         slideshow.backgroundColor = UIColor.white
@@ -52,8 +56,8 @@ class SlideshowController: UIViewController {
         }
         
         // can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
-        for ssimage in ss_images {
-            imageSource.append(ImageSource(image: ssimage.photo))
+        for ssImage in ssImages {
+            imageSource.append(ImageSource(image: ssImage.photo))
         }
         slideshow.setImageInputs(imageSource)
         
@@ -66,6 +70,7 @@ class SlideshowController: UIViewController {
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        print("potatodasdas")
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
@@ -102,8 +107,8 @@ class SlideshowController: UIViewController {
         print("potato")
     }
     
-    private func loadSS_Images() -> [SS_Image]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: SS_Image.ArchiveURL.path) as? [SS_Image]
+    private func loadUserImages() -> [userImage]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: userImage.ArchiveURL.path) as? [userImage]
     }
 }
 
