@@ -187,7 +187,7 @@
         <!--Slideshow Controller-->
         <scene sceneID="y8m-O5-1wt">
             <objects>
-                <viewController id="hUR-y5-Bdk" customClass="SlideshowController" customModule="OpenHouseCheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainSlideshow" id="hUR-y5-Bdk" customClass="SlideshowController" customModule="OpenHouseCheckIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7o-Za-3DM"/>
                         <viewControllerLayoutGuide type="bottom" id="xrj-lI-8iS"/>
@@ -235,24 +235,30 @@
                         <viewControllerLayoutGuide type="top" id="Wyg-Pc-hIy"/>
                         <viewControllerLayoutGuide type="bottom" id="y6m-7T-Bzv"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8XX-r5-mcg">
+                    <view key="view" contentMode="scaleToFill" id="8XX-r5-mcg" customClass="The">
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="POTATO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-jr-Hb3">
-                                <rect key="frame" x="535" y="350" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="C37-pL-7iZ" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="C37-pL-7iZ" secondAttribute="trailing" id="WXw-YN-Eko"/>
+                            <constraint firstItem="C37-pL-7iZ" firstAttribute="top" secondItem="8XX-r5-mcg" secondAttribute="top" id="ayW-6b-v3r"/>
+                            <constraint firstItem="C37-pL-7iZ" firstAttribute="leading" secondItem="8XX-r5-mcg" secondAttribute="leading" id="mPb-AZ-pQA"/>
+                            <constraint firstItem="C37-pL-7iZ" firstAttribute="bottom" secondItem="y6m-7T-Bzv" secondAttribute="top" id="mX9-oZ-3E7"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="slideshow" destination="C37-pL-7iZ" id="qsD-mB-ZwZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31R-0L-4NJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1988" y="983"/>
+            <point key="canvasLocation" x="1987.769784172662" y="982.73381294964031"/>
         </scene>
         <!--New Slideshow Image-->
         <scene sceneID="eDg-xy-vlO">

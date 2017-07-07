@@ -1,8 +1,8 @@
 //
-//  downSwipe.swift
+//  RealtorImagesController.swift
 //  OpenHouseCheckIn
 //
-//  Created by Laura Farvour on 7/5/17.
+//  Created by Don Walsh on 7/7/17.
 //  Copyright © 2017 Don Walsh. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import os.log
 import ImageSlideshow
 
-class downSwipe: UIViewController {
+class RealtorImagesController: UIViewController {
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .landscape
@@ -19,8 +19,7 @@ class downSwipe: UIViewController {
     var ssImages = [userImage]()
     var imageSource = [ImageSource]()
     
-    
-    
+    @IBOutlet weak var clickImage: UIImageView!
     @IBOutlet weak var slideshow: ImageSlideshow!
     
     override func viewDidLoad() {
@@ -99,3 +98,4 @@ class downSwipe: UIViewController {
         return NSKeyedUnarchiver.unarchiveObject(withFile: userImage.ArchiveURL.path) as? [userImage]
     }
 }
+
