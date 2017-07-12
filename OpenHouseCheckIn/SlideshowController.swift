@@ -19,11 +19,21 @@ class SlideshowController: UIViewController {
     var ssImages = [userImage]()
     var imageSource = [ImageSource]()
     
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var clickImage: UIImageView!
     @IBOutlet weak var slideshow: ImageSlideshow!
     
+    public var interval: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isKeyPresentInUserDefaults(key: "interval") {
+            interval = defaults.object(forKey: "interval") as? Int ?? Int()
+        } else {
+            interval = 5
+        }
         
         if let savedUserImages = loadUserImages() {
             for image in savedUserImages {
@@ -42,19 +52,14 @@ class SlideshowController: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
         
         slideshow.backgroundColor = UIColor.white
-        slideshow.slideshowInterval = 5.0
+        slideshow.slideshowInterval = Double(interval!)
         slideshow.pageControlPosition = PageControlPosition.hidden
         slideshow.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
         slideshow.pageControl.pageIndicatorTintColor = UIColor.black
         slideshow.contentScaleMode = UIViewContentMode.scaleToFill
         slideshow.draggingEnabled = false
         
-        // optional way to show activity indicator during image load (skipping the line will show no activity indicator)
-        slideshow.activityIndicator = DefaultActivityIndicator()
-        slideshow.currentPageChanged = { page in
-            print("current page:", page)
-        }
-        
+
         // can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
         for ssImage in ssImages {
             imageSource.append(ImageSource(image: ssImage.photo))
@@ -109,6 +114,10 @@ class SlideshowController: UIViewController {
     
     private func loadUserImages() -> [userImage]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: userImage.ArchiveURL.path) as? [userImage]
+    }
+    
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
     }
 }
 

@@ -135,6 +135,27 @@
                                     <segue destination="XOw-kt-EYg" kind="presentation" identifier="AddSD" id="PdE-Ho-7Rb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Slideshow Interval (in seconds):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgO-1b-4NE">
+                                <rect key="frame" x="24" y="508" width="250" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" maximumValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="mxu-gR-lu6">
+                                <rect key="frame" x="121" y="537" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="stepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="zFW-yi-xIk"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEu-VF-p4X">
+                                <rect key="frame" x="274" y="508" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -155,6 +176,8 @@
                         <outlet property="SSTableView" destination="2Tl-jK-8sT" id="EXg-hO-8v0"/>
                         <outlet property="editSDButton" destination="brs-01-nwO" id="olF-O8-t5r"/>
                         <outlet property="editSSButton" destination="TVc-H9-OJW" id="DCf-f7-4Kq"/>
+                        <outlet property="slideshowInterval" destination="bEu-VF-p4X" id="PhA-rJ-HSV"/>
+                        <outlet property="stepper" destination="mxu-gR-lu6" id="9bD-Qc-gep"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -384,7 +407,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KZb-Pz-RIx"/>
         <segue reference="PdE-Ho-7Rb"/>
+        <segue reference="6Rn-e1-03I"/>
     </inferredMetricsTieBreakers>
 </document>

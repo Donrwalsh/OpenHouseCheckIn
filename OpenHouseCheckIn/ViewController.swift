@@ -17,10 +17,16 @@ import os.log
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var slideshowInterval: UILabel!
     var ssImages = [userImage]()
     var sdImages = [userImage]()
     var toggle = false
     var newImage: userImage!
+    var SSInterval: Int = 5
+    
+    let defaults = UserDefaults.standard
     
     @IBOutlet weak var SSTableView: UITableView!
     @IBOutlet weak var editSSButton: UIButton!
@@ -32,10 +38,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if isKeyPresentInUserDefaults(key: "interval") {
+            SSInterval = defaults.object(forKey: "interval") as? Int ?? Int()
+            slideshowInterval.text = String(SSInterval)
+            stepper.value = Double(SSInterval)
+        }
+        
+        
+        //slideshowInterval.text = String(describing: defaults.object(forKey: "interval") as? [Int: Int] ?? [Int: Int]()) ?? 5
+        
         SSTableView.delegate = self
         SSTableView.dataSource = self
         SDTableView.delegate = self
         SDTableView.dataSource = self
+        
+        
         
         if let savedUserImages = loadUserImages() {
             for image in savedUserImages {
@@ -252,6 +269,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Actions
     
+
     //Edit the Slideshow Images Table
     @IBAction func startEditing(_ sender: UIButton) {
         if !SSTableView.isEditing {
@@ -271,6 +289,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SDTableView.isEditing = !SDTableView.isEditing
     }
     
+    @IBAction func stepper(_ sender: UIStepper) {
+        slideshowInterval.text = String(Int(sender.value))
+        defaults.set(Int(slideshowInterval.text!), forKey: "interval")
+    }
     
     
     
@@ -334,7 +356,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Private Methods
     
-    
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
 
     
     private func saveUserImages() {
