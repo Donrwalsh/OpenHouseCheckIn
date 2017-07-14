@@ -88,9 +88,10 @@ class SlideshowController: UIViewController {
                 let newViewController = storyBoard.instantiateViewController(withIdentifier: "downSwipe") as! downSwipe
                 self.present(newViewController, animated: true, completion: nil)
             case UISwipeGestureRecognizerDirection.left:
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = storyBoard.instantiateViewController(withIdentifier: "configMainNav") 
-                self.present(newViewController, animated: true, completion: nil)
+                //let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                //let newViewController = storyBoard.instantiateViewController(withIdentifier: "configMainNav")
+                //self.present(newViewController, animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
                 print("Swiped left")
             case UISwipeGestureRecognizerDirection.up:
                 print("Swiped up")

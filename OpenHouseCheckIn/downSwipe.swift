@@ -74,9 +74,10 @@ class downSwipe: UIViewController {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.up:
                 print("Swiped up")
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = storyBoard.instantiateViewController(withIdentifier: "MainSlideshow") as! SlideshowController
-                self.present(newViewController, animated: true, completion: nil)
+                //let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                //let newViewController = storyBoard.instantiateViewController(withIdentifier: "MainSlideshow") as! SlideshowController
+                //self.present(newViewController, animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             default:
                 break
             }
