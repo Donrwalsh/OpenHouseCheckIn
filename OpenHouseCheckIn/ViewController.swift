@@ -109,7 +109,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 fatalError("The dequeued cell is not an instance of SSTable.")
             }
             cell.nameLabel.text = userData.ssImages[indexPath.row].name
-            cell.imagePreview.image = userData.ssImages[indexPath.row].photo
+            
+            
+            cell.imagePreview.image = resizeImage(userData.ssImages[indexPath.row].photo, newHeight: 88)
+            
             
             
 
@@ -123,7 +126,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             let sdImage = userData.sdImages[indexPath.row]
             cell.nameLabel.text = sdImage.name
-            cell.imagePreview.image = sdImage.photo
+            cell.imagePreview.image = resizeImage(userData.sdImages[indexPath.row].photo, newHeight: 88)
             
             return cell
         } else {
@@ -367,6 +370,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     //MARK: Private Methods
+    
+    func resizeImage(_ image: UIImage, newHeight: CGFloat) -> UIImage {
+        let scale = newHeight / image.size.height
+        let newWidth = image.size.width * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        let imageData = UIImageJPEGRepresentation(newImage!, 1)! as Data
+        UIGraphicsEndImageContext()
+        return UIImage(data:imageData)!
+    }
     
     func report_memory() {
         var taskInfo = mach_task_basic_info()
