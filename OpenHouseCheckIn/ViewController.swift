@@ -29,7 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //var ssImages = [userImage]()
     //var sdImages = [userImage]()
     var toggle = false
-    var newImage: userImage!
+    var newImageName: String!
+    var currentImage: UIImage?
     var SSInterval: Int = 5
     
     let defaults = UserDefaults.standard
@@ -43,6 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("Checkpoint: ViewController super.viewDidLoad()")
         report_memory()
         
@@ -274,7 +276,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if toggle {
-            let alert = UIAlertController(title: "Image Saved", message: newImage.name + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Image Saved", message: newImageName + " has been saved.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Crushed it", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             toggle = false
@@ -336,7 +338,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 //Show successful save message.
                 
                 toggle = true
-                newImage = currentImage
+                newImageName = currentImage.name
             } else  if sourceViewController.potato == "SD" || sourceViewController.potato == "SDEdit" {
                 if let selectedIndexPath = SDTableView.indexPathForSelectedRow {
                     // Update an existing sd_image.
@@ -359,9 +361,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 //Show successful save message.
                 
                 toggle = true
-                newImage = currentImage
+                newImageName = currentImage.name
+                
             }
-
             
 
         }
