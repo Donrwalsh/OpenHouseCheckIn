@@ -153,7 +153,7 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        let imageData = UIImageJPEGRepresentation(newImage!, 0.4)! as Data
+        let imageData = UIImageJPEGRepresentation(newImage!, 1)! as Data
         UIGraphicsEndImageContext()
         return UIImage(data:imageData)!
     }

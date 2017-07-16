@@ -17,11 +17,17 @@ import os.log
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    struct userData {
+        static var ssImages = [userImage]()
+        static var sdImages = [userImage]()
+    }
+    
+    
 
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var slideshowInterval: UILabel!
-    var ssImages = [userImage]()
-    var sdImages = [userImage]()
+    //var ssImages = [userImage]()
+    //var sdImages = [userImage]()
     var toggle = false
     var newImage: userImage!
     var SSInterval: Int = 5
@@ -37,6 +43,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Checkpoint: ViewController super.viewDidLoad()")
+        report_memory()
+        
+        for image in loadUserImages()! {
+            if image.group == "SS" {
+                userData.ssImages.append(image)
+            } else if image.group == "SD" {
+                userData.sdImages.append(image)
+            }
+        }
         
         if isKeyPresentInUserDefaults(key: "interval") {
             SSInterval = defaults.object(forKey: "interval") as? Int ?? Int()
@@ -54,16 +70,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         
-        if let savedUserImages = loadUserImages() {
-            for image in savedUserImages {
-                if image.group == "SS" {
-                    ssImages.append(image)
-                } else if image.group == "SD" {
-                    sdImages.append(image)
-                }
-            }
-        }
-        print(sdImages.count)
+        
+        print("Checkpoint: ViewController end of override func viewDidLoad()")
+        report_memory()
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,9 +93,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == SSTableView {
-            return ssImages.count
+            return userData.ssImages.count
         } else if tableView == SDTableView {
-            return sdImages.count
+            return userData.sdImages.count
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -99,9 +108,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SS_ImageTableViewCell  else {
                 fatalError("The dequeued cell is not an instance of SSTable.")
             }
-            let ssImage = ssImages[indexPath.row]
-            cell.nameLabel.text = ssImage.name
-            cell.imagePreview.image = ssImage.photo
+            cell.nameLabel.text = userData.ssImages[indexPath.row].name
+            cell.imagePreview.image = userData.ssImages[indexPath.row].photo
+            
+            
+
             
             return cell
         } else if tableView == SDTableView {
@@ -110,7 +121,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SDImageTableViewCell  else {
                 fatalError("The dequeued cell is not an instance of SDTable.")
             }
-            let sdImage = sdImages[indexPath.row]
+            let sdImage = userData.sdImages[indexPath.row]
             cell.nameLabel.text = sdImage.name
             cell.imagePreview.image = sdImage.photo
             
@@ -137,7 +148,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if editingStyle == .delete {
                 print("Deleted")
             
-                ssImages.remove(at: indexPath.row)
+                userData.ssImages.remove(at: indexPath.row)
                 SSTableView.deleteRows(at: [indexPath], with: .automatic)
                 saveUserImages()
             }
@@ -145,7 +156,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if editingStyle == .delete {
                 print("Deleted")
                 
-                sdImages.remove(at: indexPath.row)
+                userData.sdImages.remove(at: indexPath.row)
                 SDTableView.deleteRows(at: [indexPath], with: .automatic)
                 saveUserImages()
             }
@@ -177,14 +188,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
         if tableView == SSTableView {
-            let item : userImage = ssImages[sourceIndexPath.row];
-            ssImages.remove(at: sourceIndexPath.row);
-            ssImages.insert(item, at: destinationIndexPath.row)
+            let item : userImage = userData.ssImages[sourceIndexPath.row];
+            userData.ssImages.remove(at: sourceIndexPath.row);
+            userData.ssImages.insert(item, at: destinationIndexPath.row)
             saveUserImages()
         } else if tableView == SDTableView {
-            let item : userImage = sdImages[sourceIndexPath.row];
-            sdImages.remove(at: sourceIndexPath.row);
-            sdImages.insert(item, at: destinationIndexPath.row)
+            let item : userImage = userData.sdImages[sourceIndexPath.row];
+            userData.sdImages.remove(at: sourceIndexPath.row);
+            userData.sdImages.insert(item, at: destinationIndexPath.row)
             saveUserImages()
         }
     }
@@ -195,6 +206,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     
+
     
     //MARK: Navigation
     
@@ -230,7 +242,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedSSImage = ssImages[indexPath.row]
+            let selectedSSImage = userData.ssImages[indexPath.row]
             SS_ImageViewController.currentImage = selectedSSImage
             SS_ImageViewController.potato = "SSEdit"
             
@@ -247,7 +259,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedSDImage = sdImages[indexPath.row]
+            let selectedSDImage = userData.sdImages[indexPath.row]
             SD_ImageViewController.currentImage = selectedSDImage
             SD_ImageViewController.potato = "SDEdit"
             
@@ -302,14 +314,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if sourceViewController.potato == "SS" || sourceViewController.potato == "SSEdit" {
                 if let selectedIndexPath = SSTableView.indexPathForSelectedRow {
                     // Update an existing ss_image.
-                    ssImages[selectedIndexPath.row] = currentImage
+                    userData.ssImages[selectedIndexPath.row] = currentImage
                     SSTableView.reloadRows(at: [selectedIndexPath], with: .none)
                 }
                 else {
                     // Add a new ss_image.
-                    let newIndexPath = IndexPath(row: ssImages.count, section: 0)
+                    let newIndexPath = IndexPath(row: userData.ssImages.count, section: 0)
                     
-                    ssImages.append(currentImage)
+                    userData.ssImages.append(currentImage)
                     SSTableView.insertRows(at: [newIndexPath], with: .automatic)
                     SSTableView.reloadRows(at: [newIndexPath], with: .none)
                 }
@@ -325,14 +337,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             } else  if sourceViewController.potato == "SD" || sourceViewController.potato == "SDEdit" {
                 if let selectedIndexPath = SDTableView.indexPathForSelectedRow {
                     // Update an existing sd_image.
-                    sdImages[selectedIndexPath.row] = currentImage
+                    userData.sdImages[selectedIndexPath.row] = currentImage
                     SDTableView.reloadRows(at: [selectedIndexPath], with: .none)
                 }
                 else {
                     // Add a new sd_image.
-                    let newIndexPath = IndexPath(row: sdImages.count, section: 0)
+                    let newIndexPath = IndexPath(row: userData.sdImages.count, section: 0)
                     
-                    sdImages.append(currentImage)
+                    userData.sdImages.append(currentImage)
                     SDTableView.insertRows(at: [newIndexPath], with: .automatic)
                     SDTableView.reloadRows(at: [newIndexPath], with: .none)
                 }
@@ -356,13 +368,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: Private Methods
     
+    func report_memory() {
+        var taskInfo = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+        
+        if kerr == KERN_SUCCESS {
+            if taskInfo.resident_size > 1024 && taskInfo.resident_size <= 1048576 {
+                print("Memory used: \(taskInfo.resident_size/1024) KB")
+            } else if taskInfo.resident_size > 1048576 && taskInfo.resident_size <= 1073741824 {
+                print("Memory used: \(taskInfo.resident_size/1045876) MB")
+            } else {
+            print("Memory used in bytes: \(taskInfo.resident_size)")
+            }
+        }
+        else {
+            print("Error with task_info(): " +
+                (String(cString: mach_error_string(kerr), encoding: String.Encoding.ascii) ?? "unknown error"))
+        }
+    }
+    
     func isKeyPresentInUserDefaults(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
     }
 
     
     private func saveUserImages() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ssImages + sdImages, toFile: userImage.ArchiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(userData.ssImages + userData.sdImages, toFile: userImage.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("SS_Images successfully saved.", log: OSLog.default, type: .debug)
         } else {

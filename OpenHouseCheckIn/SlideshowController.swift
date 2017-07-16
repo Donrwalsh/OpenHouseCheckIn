@@ -15,8 +15,6 @@ class SlideshowController: UIViewController {
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .landscape
     }
-    
-    var ssImages = [userImage]()
     var imageSource = [ImageSource]()
     
     let defaults = UserDefaults.standard
@@ -28,6 +26,8 @@ class SlideshowController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Checkpoint: SlideShow Controller super.viewDidLoad()")
+        report_memory()
         
         if isKeyPresentInUserDefaults(key: "interval") {
             interval = defaults.object(forKey: "interval") as? Int ?? Int()
@@ -35,13 +35,7 @@ class SlideshowController: UIViewController {
             interval = 5
         }
         
-        if let savedUserImages = loadUserImages() {
-            for image in savedUserImages {
-                if image.group == "SS" {
-                    ssImages.append(image)
-                }
-            }
-        }
+        
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
@@ -58,10 +52,11 @@ class SlideshowController: UIViewController {
         slideshow.pageControl.pageIndicatorTintColor = UIColor.black
         slideshow.contentScaleMode = UIViewContentMode.scaleToFill
         slideshow.draggingEnabled = false
+        slideshow.preload = ImagePreload.fixed(offset: 3)
         
 
         // can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
-        for ssImage in ssImages {
+        for ssImage in ViewController.userData.ssImages {
             imageSource.append(ImageSource(image: ssImage.photo))
         }
         slideshow.setImageInputs(imageSource)
@@ -75,7 +70,6 @@ class SlideshowController: UIViewController {
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        print("potatodasdas")
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
@@ -98,6 +92,30 @@ class SlideshowController: UIViewController {
             default:
                 break
             }
+        }
+    }
+    
+    func report_memory() {
+        var taskInfo = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+        
+        if kerr == KERN_SUCCESS {
+            if taskInfo.resident_size > 1024 && taskInfo.resident_size <= 1048576 {
+                print("Memory used: \(taskInfo.resident_size/1024) KB")
+            } else if taskInfo.resident_size > 1048576 && taskInfo.resident_size <= 1073741824 {
+                print("Memory used: \(taskInfo.resident_size/1045876) MB")
+            } else {
+                print("Memory used in bytes: \(taskInfo.resident_size)")
+            }
+        }
+        else {
+            print("Error with task_info(): " +
+                (String(cString: mach_error_string(kerr), encoding: String.Encoding.ascii) ?? "unknown error"))
         }
     }
     
