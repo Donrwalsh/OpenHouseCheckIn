@@ -10,6 +10,8 @@
 		E3170A431F0AD807003F8687 /* SlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3170A421F0AD807003F8687 /* SlideshowController.swift */; };
 		E3170A451F0D90C0003F8687 /* downSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3170A441F0D90C0003F8687 /* downSwipe.swift */; };
 		E3319C8D1F0EEDAF00E9625D /* SDImageTableWithCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3319C8C1F0EEDAF00E9625D /* SDImageTableWithCell.swift */; };
+		E34CD0011F1D1004008A654F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CD0001F1D1004008A654F /* Question.swift */; };
+		E34CD0031F1D1A6F008A654F /* QuestionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34CD0021F1D1A6F008A654F /* QuestionTableCell.swift */; };
 		E38DA1F81F1986D7004B78C6 /* userImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38DA1F71F1986D7004B78C6 /* userImage.swift */; };
 		E391E5EE1F034E2B00224DBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5ED1F034E2B00224DBC /* AppDelegate.swift */; };
 		E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391E5EF1F034E2B00224DBC /* ViewController.swift */; };
@@ -28,6 +30,8 @@
 		E3170A421F0AD807003F8687 /* SlideshowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideshowController.swift; sourceTree = "<group>"; };
 		E3170A441F0D90C0003F8687 /* downSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = downSwipe.swift; sourceTree = "<group>"; };
 		E3319C8C1F0EEDAF00E9625D /* SDImageTableWithCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDImageTableWithCell.swift; sourceTree = "<group>"; };
+		E34CD0001F1D1004008A654F /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		E34CD0021F1D1A6F008A654F /* QuestionTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableCell.swift; sourceTree = "<group>"; };
 		E38DA1F71F1986D7004B78C6 /* userImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userImage.swift; sourceTree = "<group>"; };
 		E391E5EA1F034E2B00224DBC /* OpenHouseCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenHouseCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E391E5ED1F034E2B00224DBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				E391E5FF1F03FD5800224DBC /* Content */,
 				E391E5ED1F034E2B00224DBC /* AppDelegate.swift */,
 				E391E5EF1F034E2B00224DBC /* ViewController.swift */,
+				E34CD0001F1D1004008A654F /* Question.swift */,
 				E38DA1F71F1986D7004B78C6 /* userImage.swift */,
 				E391E60C1F044A2800224DBC /* ss_ImageAddController.swift */,
 				E391E5F11F034E2B00224DBC /* Main.storyboard */,
@@ -100,6 +105,7 @@
 				E3170A441F0D90C0003F8687 /* downSwipe.swift */,
 				E391E60A1F0441C400224DBC /* SS_ImageTableViewCell.swift */,
 				E3319C8C1F0EEDAF00E9625D /* SDImageTableWithCell.swift */,
+				E34CD0021F1D1A6F008A654F /* QuestionTableCell.swift */,
 				E391E5F41F034E2B00224DBC /* Assets.xcassets */,
 				E391E5F91F034E2B00224DBC /* Info.plist */,
 			);
@@ -238,9 +244,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E34CD0031F1D1A6F008A654F /* QuestionTableCell.swift in Sources */,
 				E3170A431F0AD807003F8687 /* SlideshowController.swift in Sources */,
 				E3170A451F0D90C0003F8687 /* downSwipe.swift in Sources */,
 				E391E5F01F034E2B00224DBC /* ViewController.swift in Sources */,
+				E34CD0011F1D1004008A654F /* Question.swift in Sources */,
 				E3319C8D1F0EEDAF00E9625D /* SDImageTableWithCell.swift in Sources */,
 				E38DA1F81F1986D7004B78C6 /* userImage.swift in Sources */,
 				E391E60D1F044A2800224DBC /* ss_ImageAddController.swift in Sources */,

@@ -20,14 +20,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     struct userData {
         static var ssImages = [userImage]()
         static var sdImages = [userImage]()
+        static var questions = [Question]()
     }
     
     
 
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var slideshowInterval: UILabel!
-    //var ssImages = [userImage]()
-    //var sdImages = [userImage]()
+
     var toggle = false
     var newImageName: String!
     var currentImage: UIImage?
@@ -40,6 +40,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var SDTableView: UITableView!
     @IBOutlet weak var editSDButton: UIButton!
+    
+    @IBOutlet weak var QuestionsTableView: UITableView!
 
     
     override func viewDidLoad() {
@@ -55,6 +57,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 userData.sdImages.append(image)
             }
         }
+        loadSampleQuestions()
+        for question in userData.questions {
+            print(question.text)
+        }
         
         if isKeyPresentInUserDefaults(key: "interval") {
             SSInterval = defaults.object(forKey: "interval") as? Int ?? Int()
@@ -69,6 +75,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SSTableView.dataSource = self
         SDTableView.delegate = self
         SDTableView.dataSource = self
+        QuestionsTableView.delegate = self
+        QuestionsTableView.dataSource = self
         
         
         
@@ -88,6 +96,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 1
         } else if tableView == SDTableView {
             return 1
+        } else if tableView == QuestionsTableView {
+            return 1
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -98,6 +108,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return userData.ssImages.count
         } else if tableView == SDTableView {
             return userData.sdImages.count
+        } else if tableView == QuestionsTableView {
+            return userData.questions.count
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -106,19 +118,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == SSTableView {
             let cellIdentifier = "SS_ImagesTableViewCell"
-            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? SS_ImageTableViewCell  else {
                 fatalError("The dequeued cell is not an instance of SSTable.")
             }
             cell.nameLabel.text = userData.ssImages[indexPath.row].name
-            
-            
             cell.imagePreview.image = resizeImage(userData.ssImages[indexPath.row].photo, newHeight: 88)
-            
-            
-            
-
-            
             return cell
         } else if tableView == SDTableView {
             let cellIdentifier = "SD_ImagesTableViewCell"
@@ -131,6 +135,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.imagePreview.image = resizeImage(userData.sdImages[indexPath.row].photo, newHeight: 88)
             
             return cell
+        } else if tableView == QuestionsTableView {
+            let cellIdentifier = "QuestionsTableViewCell"
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? QuestionCell else {
+                fatalError("The dequeued cell is not an instance of QuestionsTable.")
+            }
+            cell.questionLabel.text = userData.questions[indexPath.row].type + " - " + userData.questions[indexPath.row].text
+            return cell
         } else {
             fatalError("tableView Data Source Policy has been given an invalid table!")
         }
@@ -142,6 +154,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if tableView == SSTableView {
             return true
         } else if tableView == SDTableView {
+            return true
+        } else if tableView == QuestionsTableView {
             return true
         } else {
             return false
@@ -165,6 +179,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 SDTableView.deleteRows(at: [indexPath], with: .automatic)
                 saveUserImages()
             }
+        } else if tableView == QuestionsTableView {
+            if editingStyle == .delete {
+                print("Deleted")
+                
+                userData.questions.remove(at: indexPath.row)
+                QuestionsTableView.deleteRows(at: [indexPath], with: .automatic)
+                //Save Questions
+            }
         }
     }
     
@@ -172,17 +194,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         if tableView == SSTableView {
             if (!SSTableView.isEditing){
-                return UITableViewCellEditingStyle.none;
-            }
-            else{
-                return UITableViewCellEditingStyle.delete;
+                return UITableViewCellEditingStyle.none
+            } else {
+                return UITableViewCellEditingStyle.delete
             }
         } else if tableView == SDTableView {
             if (!SDTableView.isEditing){
-                return UITableViewCellEditingStyle.none;
+                return UITableViewCellEditingStyle.none
+            } else {
+                return UITableViewCellEditingStyle.delete
             }
-            else{
-                return UITableViewCellEditingStyle.delete;
+        } else if tableView == QuestionsTableView {
+            if (!QuestionsTableView.isEditing){
+                return UITableViewCellEditingStyle.none
+            } else {
+                return UITableViewCellEditingStyle.delete
             }
         } else {
             return UITableViewCellEditingStyle.none;
@@ -193,15 +219,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
         if tableView == SSTableView {
-            let item : userImage = userData.ssImages[sourceIndexPath.row];
-            userData.ssImages.remove(at: sourceIndexPath.row);
+            let item : userImage = userData.ssImages[sourceIndexPath.row]
+            userData.ssImages.remove(at: sourceIndexPath.row)
             userData.ssImages.insert(item, at: destinationIndexPath.row)
             saveUserImages()
         } else if tableView == SDTableView {
-            let item : userImage = userData.sdImages[sourceIndexPath.row];
-            userData.sdImages.remove(at: sourceIndexPath.row);
+            let item : userImage = userData.sdImages[sourceIndexPath.row]
+            userData.sdImages.remove(at: sourceIndexPath.row)
             userData.sdImages.insert(item, at: destinationIndexPath.row)
             saveUserImages()
+        } else if tableView == QuestionsTableView {
+            let item : Question = userData.questions[sourceIndexPath.row]
+            userData.questions.remove(at: sourceIndexPath.row)
+            userData.questions.insert(item, at: destinationIndexPath.row)
+            //Save Questions
         }
     }
     
@@ -412,6 +443,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return UserDefaults.standard.object(forKey: key) != nil
     }
 
+    private func loadSampleQuestions() {
+        
+        guard let question1 = Question(text: "Name", type: "Text") else {
+            fatalError("Unable to instantiate question1")
+        }
+        
+        guard let question2 = Question(text: "Email Address", type: "Email") else {
+            fatalError("Unable to instantiate question2")
+        }
+        
+        guard let question3 = Question(text: "Phone Number", type: "Phone") else {
+            fatalError("Unable to instantiate question3")
+        }
+        
+        guard let question4 = Question(text: "This is a very long and complicated question, no way it would fit on one line.", type: "MC") else {
+            fatalError("Unable to instantiate question4")
+        }
+        
+        userData.questions += [question1, question2, question3, question4]
+    }
     
     private func saveUserImages() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(userData.ssImages + userData.sdImages, toFile: userImage.ArchiveURL.path)
