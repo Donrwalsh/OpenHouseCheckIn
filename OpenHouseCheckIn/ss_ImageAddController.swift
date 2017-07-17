@@ -74,7 +74,8 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
         }
         
         // Set photoImageView to display the selected image.
-        previewImage.image = selectedImage
+        
+        previewImage.image = resizeImage(selectedImage, newHeight: 834)
         toggle = true
         selectImageText.text = " "
         updateSaveButtonState()
@@ -145,6 +146,18 @@ class ss_ImageAddController: UIViewController, UITextFieldDelegate, UIImagePicke
     }
     
     //MARK: Private Methods
+    
+    func resizeImage(_ image: UIImage, newHeight: CGFloat) -> UIImage {
+        let scale = newHeight / image.size.height
+        let newWidth = image.size.width * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        let imageData = UIImageJPEGRepresentation(newImage!, 0.5)! as Data
+        UIGraphicsEndImageContext()
+        return UIImage(data:imageData)!
+    }
+    
     
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
